@@ -15,11 +15,26 @@ menu:
   social:
     - name: GitHub
       url: https://github.com/malchikovma
-      weight: 10
+      weight: 1
       identifier: github
       params:
         icon: brand-github
         newTab: true
+    - name: Telegram
+      url: https://t.me/malchikovma
+      weight: 2
+      identifier: telegram
+      params:
+        icon: brand-telegram
+        newTab: true
+    - name: Mail
+      url: mailto:malchikovma@gmail.com
+      weight: 3
+      identifier: mail
+      params:
+        icon: mail
+        newTab: true
+
 
 Params:
   Sidebar:
