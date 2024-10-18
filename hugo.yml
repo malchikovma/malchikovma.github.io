@@ -1,7 +1,6 @@
 baseURL: https://example.org/
 languageCode: ru-ru
 defaultContentLanguage: ru
-publishDir: docs
 title: Михаил Мальчиков
 theme: stack
 menu:
