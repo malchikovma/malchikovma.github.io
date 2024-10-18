@@ -29,4 +29,6 @@ Params:
   widgets:
     homepage:
       - type: tag-cloud
+    page:
+      - type: toc
 
