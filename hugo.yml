@@ -1,0 +1,33 @@
+baseURL: https://example.org/
+languageCode: ru-ru
+defaultContentLanguage: ru
+publishDir: docs
+title: Михаил Мальчиков
+theme: stack
+menu:
+  main:
+    - name: Главная
+      url: /
+      weight: 10
+      identifier: home
+      params:
+        icon: home
+        newTab: false
+  social:
+    - name: GitHub
+      url: https://github.com/malchikovma
+      weight: 10
+      identifier: github
+      params:
+        icon: brand-github
+        newTab: true
+
+Params:
+  Sidebar:
+    compact: true
+    emoji: ☕
+    subtitle: Веб-разработчик
+  widgets:
+    homepage:
+      - type: tag-cloud
+
