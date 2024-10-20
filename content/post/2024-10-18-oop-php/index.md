@@ -58,7 +58,8 @@ echo getCountryDensity('uk');
 Иногда можно встретить название CountryDTO. DTO означает [Data Transfer Object](https://martinfowler.com/eaaCatalog/dataTransferObject.html). Это говорит нам о том, что объект получили из внешнего источника (или наоборот) и он не содержит логики.
 
 ```php
-class Country {
+class Country
+{
     /** @var string */
 	public $name;
 	/** @var float */
@@ -67,7 +68,8 @@ class Country {
 	public $population;
 }
 
-function getCountry($name) {
+function getCountry($name)
+{
 	// ...
 	$countryArr = json_decode($result, true);
 	$country = new Country();
@@ -77,7 +79,8 @@ function getCountry($name) {
 	return $country;
 }
 
-function getCountryDensity($countryName) {
+function getCountryDensity($countryName)
+{
 	$country = getCountry($countryName);
 	$density = $country->population / $country->area;
 	// ...
@@ -95,8 +98,10 @@ function getCountryDensity($countryName) {
 Здесь нам и понадобится ООП. Для начала, выделим функции в отдельные самодостаточные модули - классы. Функции становятся методами классов (method).
 
 ```php
-class CountryRepository {
-	public function findByName($name) {
+class CountryRepository
+{
+	public function findByName($name)
+	{
 	    // ...
 		$countryArr = json_decode($result, true);
 		$country = new Country();
@@ -107,16 +112,19 @@ class CountryRepository {
 	}
 }
 
-class CountryService {
+class CountryService
+{
     /** @var CountryRepository */
 	private $countries;
 	
     /** @param CountryRepository $countries */
-	public function __construct($countries) {
+	public function __construct($countries)
+	{
 		$this->countries = $countries;
 	}
 	
-	public function getCountryDensity($countryName) {
+	public function getCountryDensity($countryName)
+	{
 		$country = $this->countries->findByName($countryName);
 	    // ...
 	}
@@ -134,28 +142,34 @@ echo $countryService->getCountryDensity('uk');
 Сейчас класс `CountryService` все еще полагается на `CountryRepository` и использует API. Что делать? Используем интерфейс (interface), то есть контракт, который класс должен выполнить. Если класс реализует (implements) интерфейс `CountryRepositoryInterface`, то у него должен иметься метод `findByName` с правильными параметрами и модификатором доступа. Каким образом он получает данные становится не важно:
 
 ```php
-interface CountryRepositoryInterface {
+interface CountryRepositoryInterface
+{
     public function findByName($name);
 }
 
-class ApiCountryRepository implements CountryRepositoryInterface {
+class ApiCountryRepository implements CountryRepositoryInterface
+{
     // ...
 }
 
-class DatabaseCountryRepository implements CountryRepositoryInterface {
+class DatabaseCountryRepository implements CountryRepositoryInterface
+{
     // ...
 }
 
-class FileCountryRepository implements CountryRepositoryInterface {
+class FileCountryRepository implements CountryRepositoryInterface
+{
     // ...
 }
 
-class CountryService {
+class CountryService
+{
     /** @var CountryRepositoryInterface */
 	private $countries;
 	
     /** @param CountryRepositoryInterface $countries */
-	public function __construct($countries) {
+	public function __construct($countries)
+	{
 		$this->countries = $countries;
 	}
 	// ...
@@ -169,13 +183,17 @@ class CountryService {
 Давайте подменим `CountryRepository` на тестовую реализацию, которая хранит страны в памяти.
 
 ```php
-class FakeCountryRepository implements CountryRepositoryInterface {
+class FakeCountryRepository implements CountryRepositoryInterface
+{
     /** @var Country[] */
     private $countries;
-    public function __construct($countries) {
+    public function __construct($countries)
+    {
     	$this->countries = $countries;
     }
-    public function findByName($name) {
+    
+    public function findByName($name)
+    {
     	foreach ($this->countries as $country) {
     		if ($country->name === $name) {
     			return $country;
@@ -205,18 +223,21 @@ echo $countryService->getCountryDensity('uk');
 Заодно закроем доступ извне к свойствам объекта. В ООП мы даем доступ к ним только через методы. Такой прием называется инкапсуляцией. Он нужен для защиты от несанкционированных изменений: становится проще понять, что может содержать свойство.
 
 ```php
-class Country {
+class Country
+{
 	private $name;
 	private $area;
 	private $population;
     
     // ...
     
-	public function getName() {
+	public function getName()
+	{
 		return $this->name;
 	}
     
-	public function getDensity() {
+	public function getDensity()
+	{
 		$density = $this->population / $this->area;
 		if ($density < 100) {
 			return 'low';
@@ -228,10 +249,12 @@ class Country {
 	}
 }
 
-class CountryService {
+class CountryService
+{
     // ...
     
-	public function getCountryDensity($countryName) {
+	public function getCountryDensity($countryName)
+	{
 		$country = $this->countries->findByName($countryName);
 		return $country->getDensity();
 	}

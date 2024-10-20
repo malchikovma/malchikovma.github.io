@@ -1,17 +1,21 @@
 <?php
 
-class Country {
+class Country
+{
 	public $name;
 	public $area;
 	public $population;
 }
 
-interface CountryRepositoryInterface {
+interface CountryRepositoryInterface
+{
     public function findByName($name);
 }
 
-class CountryRepository implements CountryRepositoryInterface {
-	public function findByName($name) {
+class CountryRepository implements CountryRepositoryInterface
+{
+	public function findByName($name)
+	{
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		$url = 'https://restcountries.com/v3.1/name/';
@@ -27,13 +31,18 @@ class CountryRepository implements CountryRepositoryInterface {
 	}
 }
 
-class FakeCountryRepository implements CountryRepositoryInterface {
+class FakeCountryRepository implements CountryRepositoryInterface
+{
     /** @var Country[] */
     private $countries;
-    public function __construct($countries) {
+    
+    public function __construct($countries)
+    {
     	$this->countries = $countries;
     }
-    public function findByName($name) {
+    
+    public function findByName($name)
+    {
     	foreach ($this->countries as $country) {
     		if ($country->name === $name) {
     			return $country;
@@ -43,18 +52,21 @@ class FakeCountryRepository implements CountryRepositoryInterface {
     }
 }
 
-class CountryService {
+class CountryService
+{
 	/** @var CountryRepositoryInterface */
 	private $countries;
 	
 	/** 
 	 * @param CountryRepositoryInterface $countries
 	 */
-	public function __construct($countries) {
+	public function __construct($countries)
+	{
 		$this->countries = $countries;
 	}
 	
-	public function getCountryDensity($countryName) {
+	public function getCountryDensity($countryName)
+	{
 		$country = $this->countries->findByName($countryName);
 		$density = $country->population / $country->area;
 		if ($density < 100) {

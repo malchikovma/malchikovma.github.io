@@ -1,21 +1,25 @@
 <?php
 
-class Country {
+class Country
+{
 	private $name;
 	private $area;
 	private $population;
 	
-	public function __construct($name, $area, $population) {
+	public function __construct($name, $area, $population)
+	{
 		$this->name = $name;
 		$this->area = $area;
 		$this->population = $population;
 	}
 	
-	public function getName() {
+	public function getName()
+    {
 		return $this->name;
 	}
 	
-	public function getDensity() {
+	public function getDensity()
+	{
 		$density = $this->population / $this->area;
 		if ($density < 100) {
 			return 'low';
@@ -27,12 +31,15 @@ class Country {
 	}
 }
 
-interface CountryRepositoryInterface {
+interface CountryRepositoryInterface
+{
     public function findByName($name);
 }
 
-class CountryRepository implements CountryRepositoryInterface {
-	public function findByName($name) {
+class CountryRepository implements CountryRepositoryInterface
+{
+	public function findByName($name)
+	{
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		$url = 'https://restcountries.com/v3.1/name/';
@@ -48,13 +55,17 @@ class CountryRepository implements CountryRepositoryInterface {
 	}
 }
 
-class FakeCountryRepository implements CountryRepositoryInterface {
+class FakeCountryRepository implements CountryRepositoryInterface
+{
     /** @var Country[] */
     private $countries;
-    public function __construct($countries) {
+    public function __construct($countries)
+    {
     	$this->countries = $countries;
     }
-    public function findByName($name) {
+    
+    public function findByName($name)
+    {
     	foreach ($this->countries as $country) {
     		if ($country->getName() === $name) {
     			return $country;
@@ -64,18 +75,21 @@ class FakeCountryRepository implements CountryRepositoryInterface {
     }
 }
 
-class CountryService {
+class CountryService
+{
 	/** @var CountryRepositoryInterface */
 	private $countries;
 	
 	/** 
 	 * @param CountryRepositoryInterface $countries
 	 */
-	public function __construct($countries) {
+	public function __construct($countries)
+	{
 		$this->countries = $countries;
 	}
 	
-	public function getCountryDensity($countryName) {
+	public function getCountryDensity($countryName)
+	{
 		$country = $this->countries->findByName($countryName);
 		return $country->getDensity();
 	}

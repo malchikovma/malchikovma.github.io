@@ -1,5 +1,6 @@
 <?php
-class Country {
+class Country
+{
     /** @var string */
 	public $name;
 	/** @var float */
@@ -8,7 +9,8 @@ class Country {
 	public $population;
 }
 
-function getCountry($name) {
+function getCountry($name)
+{
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	$url = 'https://restcountries.com/v3.1/name/';
@@ -23,7 +25,8 @@ function getCountry($name) {
 	return $country;
 }
 
-function getCountryDensity($countryName) {
+function getCountryDensity($countryName)
+{
 	$country = getCountry($countryName);
 	$density = $country->population / $country->area;
 	if ($density < 100) {
