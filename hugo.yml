@@ -47,7 +47,7 @@ Params:
     page:
       - type: toc
   Footer:
-    customText: 'Сайт не хранит данные пользователей'
+    customText: 'Сайт не хранит данные пользователей<br><a href="https://github.com/malchikovma/malchikovma.github.io" target="_blank">Malchikovma.ru на GitHub</a>'
   imageProcessing:
     cover:
         enabled: false
