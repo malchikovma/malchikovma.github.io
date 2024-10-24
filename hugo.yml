@@ -35,6 +35,10 @@ menu:
         icon: mail
         newTab: true
 
+markup:
+    goldmark:
+        renderer:
+            unsafe: true
 
 Params:
   Sidebar:
