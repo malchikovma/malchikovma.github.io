@@ -14,6 +14,8 @@ menu:
 
 Книги идут в хронологическом порядке по возрастанию. То, что мне особенно понравилось, отметил звездой.
 
+Художественные не перечисляю по некоторым причинам.
+
 ## Профессиональная
 
 * Head first. Java - Бейтс, Сьерра
@@ -52,6 +54,9 @@ menu:
 * Algorithms and Data Structures - N. Wirth ⭐
 * The C Programming Language 2nd Edition - Brian W. Kernighan, Dennis M. Ritchie ⭐
 * The Practice of Programming - Brian W. Kernighan, Rob Pike ⭐
+* The Linux Programming Interface - Michael Kerrisk ⭐
+* Learn Vimscript the Hard Way - Steve Losh
+
 
 ## Нон-фикшн
 
