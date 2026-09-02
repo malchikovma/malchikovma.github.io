@@ -19,5 +19,5 @@ build:
 
 # Загрузить на сервер
 deploy:
-	ssh malchikovma@malchikovma.ru "[ -d /var/www/malchikovma.ru/public ] && mv -vf /var/www/malchikovma.ru/public /var/www/malchikovma.ru/public_old"
+	ssh malchikovma@malchikovma.ru "rm -rf /var/www/malchikovma.ru/public_old && [ -d /var/www/malchikovma.ru/public ] && mv -vf /var/www/malchikovma.ru/public /var/www/malchikovma.ru/public_old"
 	rsync --archive --verbose public malchikovma@malchikovma.ru:/var/www/malchikovma.ru
