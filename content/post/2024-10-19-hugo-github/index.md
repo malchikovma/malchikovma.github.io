@@ -3,7 +3,7 @@ title = 'Как хостить сайт на GitHub с Hugo'
 date = 2024-10-17T16:33:17+03:00
 draft = false
 image = 'hugo-logo.webp'
-tags = ['Администрирование', 'Руководства']
+tags = ['Администрирование', 'Руководство']
 +++
 
 ## Введение
@@ -126,7 +126,7 @@ image = 'hugo-logo.webp'
 
 При детальном рассмотрении, видим, что GitHub использует пайплайн сборки Jekyll для нашего сайта. Даже если мы этого не хотим. Зачем разворачивать образ операционной системы и устанавливать кучу программ, просто чтоб загрузить куда-то HTML файлы? Звучит как полный оверинжиниринг. Но что поделать: используем или дефолтный, или свой.
 
-Сообщество Hugo предоставляет нам [готовый скрипт по сборке сайта в GitHub Pages](https://gohugo.io/hosting-and-deployment/hosting-on-github/). Директории `public` и `resources/_gen` теперь можно не отслеживать и добавить в .gitignore, они нам не понадобятся для публикации. 
+Сообщество Hugo предоставляет нам [готовый скрипт по сборке сайта в GitHub Pages](https://gohugo.io/hosting-and-deployment/hosting-on-github/). Директории `public` и `resources/_gen` теперь можно не отслеживать и добавить в .gitignore, они нам не понадобятся для публикации.
 
 Создаем файл `.github/workflows/hugo.yaml` и копируем в него содержимое:
 
@@ -170,7 +170,7 @@ jobs:
       - name: Install Hugo CLI
         run: |
           wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb \
-          && sudo dpkg -i ${{ runner.temp }}/hugo.deb          
+          && sudo dpkg -i ${{ runner.temp }}/hugo.deb
       - name: Install Dart Sass
         run: sudo snap install dart-sass
       - name: Checkout
@@ -192,7 +192,7 @@ jobs:
           hugo \
             --gc \
             --minify \
-            --baseURL "${{ steps.pages.outputs.base_url }}/"          
+            --baseURL "${{ steps.pages.outputs.base_url }}/"
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
